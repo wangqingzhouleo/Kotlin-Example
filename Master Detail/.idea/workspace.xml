@@ -83,7 +83,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Repo.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Repo.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/Model/Repo.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="571">
@@ -91,6 +91,16 @@
               <folding>
                 <element signature="e#38#118#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Error.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/Model/Error.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2260,6 +2270,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/RequestManager.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/Model/User.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/Model/Repo.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/Model/Error.kt" />
       </list>
     </option>
   </component>
@@ -2686,6 +2697,14 @@
           <folding>
             <element signature="e#38#118#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/leo/gitapp/Model/Error.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
