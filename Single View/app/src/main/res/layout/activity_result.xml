@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        tools:context=".Activities.ResultActivity">
+
+    <ImageView
+            android:layout_width="100pt"
+            android:layout_height="100pt" app:srcCompat="@android:color/background_light"
+            android:layout_alignParentStart="true" android:layout_alignParentTop="true" android:id="@+id/result_user_avatar"/>
+    <TextView
+            android:textSize="18pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/result_user_avatar"
+            android:id="@+id/result_username"/>
+    <TextView
+            android:textSize="14pt"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onUserIdClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/result_username"
+            android:id="@+id/result_user_id"/>
+    <TextView
+            android:textSize="14pt"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/result_user_id"
+            android:id="@+id/result_public_repo_count"/>
+
+</RelativeLayout>
