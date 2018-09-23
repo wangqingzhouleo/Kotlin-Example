@@ -1,10 +1,14 @@
 package com.example.leo.gitapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.leo.gitapp.Model.Keys
+import com.example.leo.gitapp.Model.Repo
 import com.example.leo.gitapp.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_repo_detail.*
 import kotlinx.android.synthetic.main.repo_detail.view.*
@@ -20,18 +24,17 @@ class RepoDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-    private var item: DummyContent.DummyItem? = null
+    private var item: Repo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
+            if (it.containsKey(Keys.REPO.rawValue)) {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
+                item = it.getParcelable(Keys.REPO.rawValue)
             }
         }
     }
@@ -41,18 +44,17 @@ class RepoDetailFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.repo_detail, container, false)
 
         // Show the dummy content as text in a TextView.
-        item?.let {
-            rootView.repo_detail.text = it.details
+        item?.let { repo ->
+            rootView.repo_id.text = "ID: ${repo.id}"
+            rootView.repo_name.text = "Repo name: ${repo.name}"
+            rootView.repo_html_link.text = "URL: ${repo.htmlUrl}"
+            rootView.repo_language.text = "Language: ${repo.language}"
+
+            rootView.repo_html_link.setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(repo.htmlUrl)))
+            }
         }
 
         return rootView
-    }
-
-    companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        const val ARG_ITEM_ID = "item_id"
     }
 }

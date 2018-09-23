@@ -6,26 +6,42 @@ import org.json.JSONObject
 
 class Repo() : Parcelable {
 
-    private var _name: String = ""
-    var name: String
-        get() { return name.toUpperCase() }
-        set(value) { _name = value }
-
+    var id: Int = 0
+    var name: String = ""
     var htmlUrl: String = ""
+    var openIssuesCount: Int = 0
+    var watchers: Int = 0
+    var forksCount: Int = 0
+    var language: String = ""
 
     constructor(data: JSONObject) : this() {
+        id = data.getInt("id")
         name = data.getString("name")
         htmlUrl = data.getString("html_url")
+        openIssuesCount = data.getInt("open_issues_count")
+        watchers = data.getInt("watchers")
+        forksCount = data.getInt("forks_count")
+        language = data.getString("language")
     }
 
     constructor(parcel: Parcel) : this() {
+        id = parcel.readInt()
         name = parcel.readString()
         htmlUrl = parcel.readString()
+        openIssuesCount = parcel.readInt()
+        watchers = parcel.readInt()
+        forksCount = parcel.readInt()
+        language = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(htmlUrl)
+        parcel.writeInt(openIssuesCount)
+        parcel.writeInt(watchers)
+        parcel.writeInt(forksCount)
+        parcel.writeString(language)
     }
 
     override fun describeContents(): Int {

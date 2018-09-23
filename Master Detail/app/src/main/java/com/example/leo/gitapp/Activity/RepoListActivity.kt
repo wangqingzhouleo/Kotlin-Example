@@ -1,4 +1,4 @@
-package com.example.leo.gitapp
+package com.example.leo.gitapp.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.leo.gitapp.Model.Keys
+import com.example.leo.gitapp.Model.Repo
+import com.example.leo.gitapp.R
+import com.example.leo.gitapp.RepoDetailFragment
 
 import com.example.leo.gitapp.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_repo_list.*
@@ -35,9 +39,6 @@ class RepoListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_list)
 
-        setSupportActionBar(toolbar)
-        toolbar.title = title
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -55,11 +56,12 @@ class RepoListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        val repos = intent.getParcelableArrayListExtra<Repo>(Keys.REPOS.rawValue)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, repos, twoPane)
     }
 
     class SimpleItemRecyclerViewAdapter(private val parentActivity: RepoListActivity,
-                                        private val values: List<DummyContent.DummyItem>,
+                                        private val values: List<Repo>,
                                         private val twoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -67,11 +69,11 @@ class RepoListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as DummyContent.DummyItem
+                val item = v.tag as Repo
                 if (twoPane) {
                     val fragment = RepoDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(RepoDetailFragment.ARG_ITEM_ID, item.id)
+                            putParcelable(Keys.REPO.rawValue, item)
                         }
                     }
                     parentActivity.supportFragmentManager
@@ -80,7 +82,7 @@ class RepoListActivity : AppCompatActivity() {
                             .commit()
                 } else {
                     val intent = Intent(v.context, RepoDetailActivity::class.java).apply {
-                        putExtra(RepoDetailFragment.ARG_ITEM_ID, item.id)
+                        putExtra(Keys.REPO.rawValue, item)
                     }
                     v.context.startActivity(intent)
                 }
@@ -95,8 +97,7 @@ class RepoListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.idView.text = item.name
 
             with(holder.itemView) {
                 tag = item

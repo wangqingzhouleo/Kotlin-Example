@@ -1,20 +1,18 @@
 package com.example.leo.gitapp.Model
 
-import com.androidnetworking.error.ANError
-
 class Result<T> {
 
     val responseType: ResponseType
     var value: T? = null
-    var error: Error? = null
+    var gitAppError: GitAppError? = null
 
     constructor(value: T) {
         this.value = value
         responseType = ResponseType.SUCCESS
     }
 
-    constructor(error: Error) {
-        this.error = error
+    constructor(gitAppError: GitAppError) {
+        this.gitAppError = gitAppError
         responseType = ResponseType.ERROR
     }
 }

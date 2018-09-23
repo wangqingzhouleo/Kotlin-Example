@@ -10,7 +10,7 @@
               android:divider="?android:attr/dividerHorizontal"
               android:orientation="horizontal"
               android:showDividers="middle"
-              tools:context=".RepoListActivity">
+              tools:context=".Activity.RepoListActivity">
 
     <!--
     This layout is a two-pane layout for the Repos
@@ -27,7 +27,7 @@
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginRight="16dp"
                                             app:layoutManager="LinearLayoutManager"
-                                            tools:context="com.example.leo.gitapp.RepoListActivity"
+                                            tools:context="com.example.leo.gitapp.Activity.RepoListActivity"
                                             tools:listitem="@layout/repo_list_content"/>
 
     <FrameLayout

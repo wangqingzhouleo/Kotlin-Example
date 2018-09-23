@@ -1,10 +1,13 @@
-package com.example.leo.gitapp
+package com.example.leo.gitapp.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.example.leo.gitapp.Model.Keys
+import com.example.leo.gitapp.R
+import com.example.leo.gitapp.RepoDetailFragment
 import kotlinx.android.synthetic.main.activity_repo_detail.*
 
 /**
@@ -18,15 +21,9 @@ class RepoDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_detail)
-        setSupportActionBar(detail_toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
         // Show the Up button in the action bar.
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -42,8 +39,7 @@ class RepoDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = RepoDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(RepoDetailFragment.ARG_ITEM_ID,
-                            intent.getStringExtra(RepoDetailFragment.ARG_ITEM_ID))
+                    putParcelable(Keys.REPO.rawValue, intent.getParcelableExtra(Keys.REPO.rawValue))
                 }
             }
 

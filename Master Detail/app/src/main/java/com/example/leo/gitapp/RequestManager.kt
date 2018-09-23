@@ -22,7 +22,7 @@ class RequestManager {
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener {
                     override fun onResponse(response: JSONObject?) {
-                        val result = response.let { it } ?: return completion(Result(Error.PARSE_RESULT_FAILED))
+                        val result = response.let { it } ?: return completion(Result(GitAppError.PARSE_RESULT_FAILED))
                         completion(Result(User(result)))
                     }
 
@@ -31,6 +31,11 @@ class RequestManager {
                     }
 
                 })
+    }
+
+    fun loadReposWithUsername(username: String, completion: (Result<List<Repo>>) -> Unit) {
+        val url = "$baseUrl/users/$username/repos"
+        loadReposWithUrl(url, 100, completion)
     }
 
     fun loadReposFromUser(user: User, completion: (Result<List<Repo>>) -> Unit) {
@@ -44,9 +49,9 @@ class RequestManager {
                 .build()
                 .getAsJSONArray(object : JSONArrayRequestListener {
                     override fun onResponse(response: JSONArray?) {
-                        val result = response.let { it } ?: return completion(Result(Error.PARSE_RESULT_FAILED))
+                        val result = response.let { it } ?: return completion(Result(GitAppError.PARSE_RESULT_FAILED))
                         if (result.length() == 0) {
-                            return completion(Result(Error.NO_RESULT))
+                            return completion(Result(GitAppError.NO_RESULT))
                         }
                         val list = MutableList(result.length()) { index ->
                             Repo(result.getJSONObject(index))
@@ -61,10 +66,10 @@ class RequestManager {
                 })
     }
 
-    private fun parseAnError(anError: ANError?): Error {
+    private fun parseAnError(anError: ANError?): GitAppError {
         return when (anError?.errorCode) {
-            404 -> Error.USER_NOT_FOUND
-            else -> Error.REQUEST_FAILED
+            404 -> GitAppError.USER_NOT_FOUND
+            else -> GitAppError.REQUEST_FAILED
         }
     }
 }
